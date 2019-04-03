@@ -1,0 +1,16 @@
+<!--<button (click)="getFilms()">GET /Films</button>-->
+<h2>Last Films</h2>
+<!--<pre>-->
+  <!--{{films | json}}-->
+<!--</pre>-->
+<!--<button (click)="getToFetchFilms">fetch</button>-->
+<ul class="films">
+  <li *ngFor="let film of films">
+    <!--routerLink="/detail/{{hero.id}}-->
+
+    <p>{{film.title}}</p>
+    <img src="https://image.tmdb.org/t/p/w300/{{ film.poster_path }}" >
+  </li>
+</ul>
+<app-film-detail></app-film-detail>
+
