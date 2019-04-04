@@ -10,6 +10,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { FilmService} from './film.service';
+import { RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+const appRoutes: Routes = [
+  { path: 'toprated', component: FilmsComponent },
+];
 
 @NgModule({
   declarations: [
@@ -17,7 +23,8 @@ import { FilmService} from './film.service';
     SearchComponent,
     FilmsComponent,
     FilmDetailComponent,
-    NavbarComponent
+    NavbarComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +32,7 @@ import { FilmService} from './film.service';
     NgbModule,
     AppRoutingModule
   ],
-  providers: [ FilmService ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

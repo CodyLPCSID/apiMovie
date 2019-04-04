@@ -31,14 +31,7 @@ export class FilmsComponent implements OnInit {
   }
 
   ngOnInit() {
-    return this.filmService.getAllTopRatedFilms()
-      .subscribe(
-        data => {
-          this.getResultsFilms(data);
-        },
-        error => {
-          alert('ERROR');
-        });
+    this.getToFetchFilms();
     // let obs = this.http.get('https://api.themoviedb.org/3/movie/top_rated?api_key=b6aeb3ece0d12122656a309c7613fec1&language=en-US&page=1');
     // obs.subscribe((response) => console.log(response));
   }
