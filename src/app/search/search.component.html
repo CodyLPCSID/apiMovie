@@ -13,15 +13,15 @@
   <ngb-pagination
     class="d-flex justify-content-center"
     [collectionSize]="json.total_pages"
-    [(page)]="json.page"
+    [(page)]="page"
     [maxSize]="5"
     [rotate]="true"
+    (pageChange)="loadPage($event)"
     [ellipses]="false"
     [boundaryLinks]="true"></ngb-pagination>
 
-  <p>{{page}}</p>
-
 </div>
+
 
 <div class="container">
 
@@ -30,22 +30,50 @@
       <div class="col-4" *ngFor="let film of films">
         <!--routerLink="/detail/{{hero.id}}-->
         <div class="card" style="width: 18rem; margin: 20px">
-          <img src="https://image.tmdb.org/t/p/w400{{ film.backdrop_path }}" class="card-img-top">
+          <div *ngIf="film.backdrop_path">
+            <img src="https://image.tmdb.org/t/p/w400{{ film.backdrop_path }}" class="card-img-top">
+          </div>
+          <!--<div *ngIf="!film.backdrop_path">-->
+            <!--<img *ngIf="film.poster_path" src="https://image.tmdb.org/t/p/w400{{ film.poster_path }}" class="card-img-top">-->
+          <!--</div>-->
+
+
           <div class="card-body">
             <h5 class="card-title">{{film.title}}</h5>
-            <p class="card-text">{{ film.overview }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <a href="#" class="btn btn-primary">Details</a>
-              <small class="text-muted"> Note : {{film.vote_average}} / 10</small>
+            <p>
+              <button type="button" class="btn btn-outline-primary" data-target="film.id"(click)="isCollapsed = !isCollapsed"
+                      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                Synopsis
+              </button>
+            </p>
+            <div id="{{film.id}}" [ngbCollapse]="!isCollapsed">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-text">{{ film.overview }}</p>
+                </div>
+              </div>
             </div>
+            <small class="text-muted"> Date de sortie : {{film.release_date | date:'dd MMMM yyyy' }}</small>
+            <div class="d-flex justify-content-between align-items-center">
+              <ngb-rating [rate]="film.vote_average"></ngb-rating>
+            </div>
+
+
           </div>
         </div>
       </div>
     </div>
   </ul>
 
-  <ngb-pagination [collectionSize]="json.total_pages" [(page)]="json.page" [boundaryLinks]="true"
-                  [maxSize]="10"></ngb-pagination>
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    [collectionSize]="json.total_pages"
+    [(page)]="page"
+    [maxSize]="5"
+    [rotate]="true"
+    (pageChange)="loadPage($event)"
+    [ellipses]="false"
+    [boundaryLinks]="true"></ngb-pagination>
 
 </div>
 

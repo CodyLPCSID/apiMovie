@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../search.service';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +12,10 @@ export class SearchComponent implements OnInit {
   films: any[];
   json: any[];
   value = '';
-  page = 2;
+  page = 1;
+  previousPage = 1;
+
+  public isCollapsed = false;
 
   getResultsFilms(data) {
     this.films = data.results;
@@ -20,31 +24,36 @@ export class SearchComponent implements OnInit {
     console.log(data);
   }
 
-
-  constructor(private searchService: SearchService) {
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.getSearchFilms(this.value, this.page);
+    }
   }
 
-  getSearchFilms(value: string) {
+  constructor(private searchService: SearchService, config: NgbRatingConfig) {
+    config.max = 10;
+    config.readonly = true;
+  }
+
+  getSearchFilms(value: string, page: number) {
     this.value = value;
+    this.page = page;
     if (this.value === '') {
       return null;
     } else {
-      console.log(this.searchService.searchFilm(this.value, 2));
-      return this.searchService.searchFilm(this.value, 2)
+      console.log(this.searchService.searchFilm(this.value, page));
+      return this.searchService.searchFilm(this.value, page)
         .subscribe(
           resp => {
             this.getResultsFilms(resp);
-          },
-          error => {
-            alert('ERROR');
           });
     }
   }
 
 
-
   ngOnInit() {
-    this.getSearchFilms('');
+    this.getSearchFilms('', this.page);
   }
 
 }

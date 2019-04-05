@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   appName = 'Api Movie';
 
-  value = '';
-
-  onKey(value: string) {
-    this.value = value;
-  }
+  // value = '';
+  //
+  // onKey(value: string) {
+  //   this.value = value;
+  // }
 
 }
