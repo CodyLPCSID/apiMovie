@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'apiMovie';
+  appName = 'Api Movie';
+
+  value = '';
+
+  onKey(value: string) {
+    this.value = value;
+  }
+
 }

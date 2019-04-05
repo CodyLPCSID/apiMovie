@@ -1,3 +1,52 @@
-<p>
-  search works!
-</p>
+<div class="container">
+  <div class="input-group input-group-lg">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-lg">Recherche</span>
+    </div>
+    <input #box (keyup)="getSearchFilms(box.value)" type="text" class="form-control" aria-label="Sizing example input"
+           aria-describedby="inputGroup-sizing-lg">
+  </div>
+  <h5><span class="badge badge-secondary"> Resultats : {{json.total_results}}</span> <span
+    class="badge badge-secondary"> Pages : {{json.total_pages}}</span> <span
+    class="badge badge-primary">{{value}}</span></h5>
+
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    [collectionSize]="json.total_pages"
+    [(page)]="json.page"
+    [maxSize]="5"
+    [rotate]="true"
+    [ellipses]="false"
+    [boundaryLinks]="true"></ngb-pagination>
+
+  <p>{{page}}</p>
+
+</div>
+
+<div class="container">
+
+  <ul class="films">
+    <div class="row card-group">
+      <div class="col-4" *ngFor="let film of films">
+        <!--routerLink="/detail/{{hero.id}}-->
+        <div class="card" style="width: 18rem; margin: 20px">
+          <img src="https://image.tmdb.org/t/p/w400{{ film.backdrop_path }}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{film.title}}</h5>
+            <p class="card-text">{{ film.overview }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="#" class="btn btn-primary">Details</a>
+              <small class="text-muted"> Note : {{film.vote_average}} / 10</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ul>
+
+  <ngb-pagination [collectionSize]="json.total_pages" [(page)]="json.page" [boundaryLinks]="true"
+                  [maxSize]="10"></ngb-pagination>
+
+</div>
+
+

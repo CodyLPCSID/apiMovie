@@ -15,6 +15,7 @@ export class FilmsComponent implements OnInit {
     console.log(data.results);
   }
 
+
   constructor(private filmService: FilmService) {
   }
 

@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   MOVIE_API_KEY : 'b6aeb3ece0d12122656a309c7613fec1',
-  MOVIE_API_URL_TOP_RATED : 'https://api.themoviedb.org/3/movie/top_rated?api_key='
+  MOVIE_API_URL_TOP_RATED : 'https://api.themoviedb.org/3/movie/top_rated?api_key=',
+  MOVIE_API_URL_UPCOMING : 'https://api.themoviedb.org/3/movie/upcoming?api_key=',
+  MOVIE_API_URL_SEARCH : 'https://api.themoviedb.org/3/search/movie?api_key='
 };
 
 /*
